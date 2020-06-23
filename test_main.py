@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
 import django
+
 django.setup()
 from django.test import TestCase
 from api.models import User, Event, Group, Agent
@@ -25,11 +26,14 @@ class TestChallenge10(TestCase):
         alexandre = User.objects.create(name="alexandre", email="alexandre@gmail.com", password="gmmggtes12")
         jose = User.objects.create(name="jose", email="jose@gmail.com", password="gmmggtes12")
         aline = User.objects.create(name="aline", email="aline@gmail.com", password="gmmggtes12")
-        kenny = User.objects.create(name="kenny", email="kenny@gmail.com", password="gmmggtes12", last_login=(datetime.today() - timedelta(days=12)))
+        kenny = User.objects.create(name="kenny", email="kenny@gmail.com", password="gmmggtes12",
+                                    last_login=(datetime.today() - timedelta(days=12)))
         john = User.objects.create(name="john", email="john@gmail.com", password="gmmggtes12")
-        mario = User.objects.create(name="mario", email="mario@gmail.com", password="gmmggtes12", last_login=(datetime.today() - timedelta(days=12)))
+        mario = User.objects.create(name="mario", email="mario@gmail.com", password="gmmggtes12",
+                                    last_login=(datetime.today() - timedelta(days=12)))
         maria = User.objects.create(name="maria", email="maria@gmail.com", password="gmmggtes12")
-        roberto = User.objects.create(name="roberto", email="roberto@gmail.com", password="gmmggtes12", last_login=(datetime.today() - timedelta(days=12)))
+        roberto = User.objects.create(name="roberto", email="roberto@gmail.com", password="gmmggtes12",
+                                      last_login=(datetime.today() - timedelta(days=12)))
         fabio = User.objects.create(name="fabio", email="fabio@gmail.com", password="gmmggtes12")
         denis = User.objects.create(name="denis", email="denis@gmail.com", password="gmmggtes12")
 
@@ -44,8 +48,10 @@ class TestChallenge10(TestCase):
         fabio.group.set([operators])
         denis.group.set([operators])
 
-        agent_linux = Agent.objects.create(name='linux-server', address='10.0.34.15', status=True, env='production', version='1.1.1', user=alexandre)
-        agent_mac = Agent.objects.create(name='mac-server', address='10.0.34.123', status=True, env='production', version='1.1.2', user=john)
+        agent_linux = Agent.objects.create(name='linux-server', address='10.0.34.15', status=True, env='production',
+                                           version='1.1.1', user=alexandre)
+        agent_mac = Agent.objects.create(name='mac-server', address='10.0.34.123', status=True, env='production',
+                                         version='1.1.2', user=john)
 
         Event.objects.create(level='critical', data=datetime.today(), agent=agent_linux, arquivado=False)
         Event.objects.create(level='information', data=datetime.today(), agent=agent_mac, arquivado=False)
@@ -74,7 +80,7 @@ class TestChallenge10(TestCase):
         users = get_all_critical_events_by_user(agent)
         self.assertEqual(
             users.count(),
-           1
+            1
         )
 
     def test_6(self):
